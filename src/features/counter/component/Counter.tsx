@@ -59,7 +59,7 @@ const Button = styled.button`
   &:active {
     background-color: rgba(112, 76, 182, 0.2);
   }
-`
+`;
 
 const AsyncButton = styled(Button)`
   position: relative;
@@ -80,7 +80,7 @@ const AsyncButton = styled(Button)`
     opacity: 1;
     transition: 0s;
   }
-`
+`;
 
 export function Counter() {
   const count = useAppSelector(selectCount);
@@ -98,7 +98,7 @@ export function Counter() {
         >
           -
         </Button>
-        <span className='counter-value'>{count}</span>
+        <span className="counter-value">{count}</span>
         <Button
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
@@ -108,24 +108,18 @@ export function Counter() {
       </Row>
       <Row>
         <input
-          className='counter-amount'
+          className="counter-amount"
           aria-label="Set increment amount"
           value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
+          onChange={e => setIncrementAmount(e.target.value)}
         />
-        <Button
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
-        >
+        <Button onClick={() => dispatch(incrementByAmount(incrementValue))}>
           Add Amount
         </Button>
-        <AsyncButton
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
+        <AsyncButton onClick={() => dispatch(incrementAsync(incrementValue))}>
           Add Async
         </AsyncButton>
-        <Button
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
-        >
+        <Button onClick={() => dispatch(incrementIfOdd(incrementValue))}>
           Add If Odd
         </Button>
       </Row>
