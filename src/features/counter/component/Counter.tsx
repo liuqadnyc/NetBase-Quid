@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from '../slice/counterSlice';
+import { actions as counterActions } from '../slice/counterSlice';
 import styled from 'styled-components';
+import { selectCount } from '../../../app/selector';
+import { incrementAsync } from '../action/fetchAction';
 
 const Row = styled.div`
   display: flex;
@@ -89,19 +84,25 @@ export function Counter() {
 
   const incrementValue = Number(incrementAmount) || 0;
 
+  const incrementIfOdd = (amount: number) => {
+    if (count % 2 === 1) {
+      dispatch(counterActions.incrementByAmount(amount));
+    }
+  };
+
   return (
     <div>
       <Row>
         <Button
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={() => dispatch(counterActions.decrement())}
         >
           -
         </Button>
         <span className="counter-value">{count}</span>
         <Button
           aria-label="Increment value"
-          onClick={() => dispatch(increment())}
+          onClick={() => dispatch(counterActions.increment())}
         >
           +
         </Button>
@@ -113,13 +114,17 @@ export function Counter() {
           value={incrementAmount}
           onChange={e => setIncrementAmount(e.target.value)}
         />
-        <Button onClick={() => dispatch(incrementByAmount(incrementValue))}>
+        <Button
+          onClick={() =>
+            dispatch(counterActions.incrementByAmount(incrementValue))
+          }
+        >
           Add Amount
         </Button>
         <AsyncButton onClick={() => dispatch(incrementAsync(incrementValue))}>
           Add Async
         </AsyncButton>
-        <Button onClick={() => dispatch(incrementIfOdd(incrementValue))}>
+        <Button onClick={() => incrementIfOdd(incrementValue)}>
           Add If Odd
         </Button>
       </Row>

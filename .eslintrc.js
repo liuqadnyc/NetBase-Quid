@@ -21,14 +21,15 @@ module.exports = {
   },
   plugins: ['react', 'jsx-a11y', '@typescript-eslint'],
   rules: {
-    'react-hooks/exhaustive-deps': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
     'no-var': 'error',
     'brace-style': 'error',
     'prefer-template': 'error',
     'radix': 'error',
     'space-before-blocks': 'error',
     'import/prefer-default-export': 'off',
-    'no-console': 1,
+    'no-console': 'warn',
+    'no-unused-vars': 'warn',
   },
   overrides: [
     {
