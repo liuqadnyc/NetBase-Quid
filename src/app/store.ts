@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { reducer as counterReducer } from '../features/counter/slice/counterSlice';
+import { reducer as mobileDataReducer } from '../features/counter/slice/mobileDataSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    mobileData: mobileDataReducer,
   },
 });
 
