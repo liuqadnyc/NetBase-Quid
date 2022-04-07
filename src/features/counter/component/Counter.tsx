@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { actions as counterActions } from '../slice/counterSlice';
 import styled from 'styled-components';
 import { selectCount } from '../../../app/selector';
-import { incrementAsync } from '../action/fetchAction';
+import { fetchData, incrementAsync } from '../action/fetchAction';
 
 const Row = styled.div`
   display: flex;
@@ -81,6 +81,14 @@ export function Counter() {
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
+
+  useEffect(() => {
+    const initialFetch = async () => {
+      const data = await fetchData();
+      console.log(data, 'data');
+    };
+    initialFetch();
+  }, []);
 
   const incrementValue = Number(incrementAmount) || 0;
 
